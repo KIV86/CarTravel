@@ -1,4 +1,4 @@
-package carTravel.Entityes;
+package carTravel.entity;
 
 import lombok.Data;
 
