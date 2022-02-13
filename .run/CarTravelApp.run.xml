@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="CarTravelApp" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
-    <option name="MAIN_CLASS_NAME" value="com.github.KIV86.CarTravel.app.CarTravelApp" />
+    <option name="MAIN_CLASS_NAME" value="carTravel.CarTravelApp" />
     <module name="app" />
     <extension name="coverage">
       <pattern>

@@ -1,4 +1,4 @@
-package com.github.KIV86.CarTravel.app.common;
+package carTravel.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
