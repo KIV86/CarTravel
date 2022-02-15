@@ -1,16 +1,14 @@
 package carTravel.entity;
 
-import lombok.*;
+import lombok.Data;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "carTravel.users")
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -24,10 +22,6 @@ public class User {
     private String account;
 
     @OneToOne(cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
-
-    @OneToMany(mappedBy = "user")
-    private List<Issue> issues = new ArrayList<>();
-
+    @JoinColumn(name = "user_role_id", nullable = false)
+    private UserRole userRole;
 }

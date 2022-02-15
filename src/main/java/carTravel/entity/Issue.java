@@ -7,15 +7,12 @@ import java.sql.Time;
 
 @Data
 @Entity
+@Table(name = "carTravel.tasks")
 public class Issue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -33,10 +30,14 @@ public class Issue {
     private Time dateDone;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "boss_id")
-    private User boss;
+    @JoinColumn(name = " task_writer_id")
+    private Users task_writer_id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "employee_id")
-    private User employee;
+    @JoinColumn(name = " executor_id")
+    private Users executor_id;
+
+    @ManyToOne
+    @JoinColumn(name = "tasks_id")
+    private Tasks tasks;
 }
