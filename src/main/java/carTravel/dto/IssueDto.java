@@ -36,6 +36,18 @@ public class IssueDto {
     @NonNull
     private Tasks tasks;
 
+    public IssueDto(@NonNull Integer id, @NonNull String name, String description, @NonNull Time planDateStart, @NonNull Time planDateEnd, @NonNull Boolean dateDone, @NonNull Users taskWriterId, @NonNull Users executorId, @NonNull Tasks tasks) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.planDateStart = planDateStart;
+        this.planDateEnd = planDateEnd;
+        this.dateDone = dateDone;
+        this.taskWriterId = taskWriterId;
+        this.executorId = executorId;
+        this.tasks = tasks;
+    }
+
     public IssueDto(Issue byIdOrThrow) {
 
     }

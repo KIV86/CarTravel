@@ -55,15 +55,16 @@ public class IssueServiceImpl implements IssueService {
         repository.deleteAllByPlanDateEndBefore(dateTime);
     }
 
-    public IssueDto getActualIssue() {
-        return repository.findIssueByIsDoneFalseOrderByDateDoneDesc();
+    public Issue getActualIssue() {
+        Issue issue = repository.findIssueByIsDoneFalseOrderByDateDoneDesc();
+        return issue;
     }
 
-    public IssueDto getClosedIssue() {
+    public Issue getClosedIssue() {
         return repository.findIssueByIsDoneTrueOrderByDateDoneDesc();
     }
 
-    public IssueDto getIssueByExecutor(long id) {
+    public Issue getIssueByExecutor(long id) {
         return repository.findIssueByExecutorId(id);
 
     }

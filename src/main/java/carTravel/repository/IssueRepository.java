@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.time.Instant;
 
 public interface IssueRepository extends JpaRepository<Issue, Long> {
-    IssueDto findIssueByIsDoneFalseOrderByDateDoneDesc();
-    IssueDto findIssueByIsDoneTrueOrderByDateDoneDesc();
-    IssueDto findIssueByExecutorId(Long id);
+    Issue findIssueByIsDoneFalseOrderByDateDoneDesc();
+    Issue findIssueByIsDoneTrueOrderByDateDoneDesc();
+    Issue findIssueByExecutorId(Long id);
     void deleteAllByPlanDateEndBefore(Instant dateTime);
   }
