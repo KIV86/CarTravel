@@ -1,18 +1,20 @@
 package carTravel.entity;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.sql.Time;
 
 @Data
 @Entity
+@Accessors(chain = true)
 @Table(name = "carTravel.tasks")
 public class Issue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -26,16 +28,16 @@ public class Issue {
     @Column(name = "plan_date_end")
     private Time planDateEnd;
 
-    @Column(name = "date_done")
-    private Time dateDone;
+    @Column(name = "is_done")
+    private Boolean isDone;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = " task_writer_id")
-    private Users task_writer_id;
+    private Users taskWriterId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = " executor_id")
-    private Users executor_id;
+    private Users executorId;
 
     @ManyToOne
     @JoinColumn(name = "tasks_id")

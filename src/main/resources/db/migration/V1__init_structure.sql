@@ -25,7 +25,7 @@ create table carTravel.tasks
 create table carTravel.issue
 (
     id              serial primary key,
-    date_done       time,
+    is_done       boolean,
     description     varchar(255),
     name            varchar(255) not null,
     plan_date_end   time,
