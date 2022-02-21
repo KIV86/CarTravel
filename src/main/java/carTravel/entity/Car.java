@@ -1,10 +1,13 @@
 package carTravel.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 @Data
 @Entity
+@RequiredArgsConstructor
 @Table(name = "carTravel.car")
 public class Car {
     @Id
