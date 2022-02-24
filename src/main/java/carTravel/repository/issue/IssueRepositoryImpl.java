@@ -63,7 +63,7 @@ public class IssueRepositoryImpl {
         return repository.findIssuesByIsDoneIsTrueOrderByPlanDateEndDesc();
     }
 
-    public Issue getIssueByExecutor(Users id) {
+    public Issue getIssueByExecutor(Long id) {
         return repository.findIssuesByExecutorId(id);
 
     }
