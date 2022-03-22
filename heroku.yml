@@ -1,0 +1,3 @@
+build:
+  docker:
+    car-travel-bot: Dockerfile
