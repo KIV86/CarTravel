@@ -1,43 +1,51 @@
 package carTravel.common;
 
-import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.UpdatesListener;
+import com.pengrad.telegrambot.model.CallbackQuery;
+import com.pengrad.telegrambot.model.InlineQuery;
+import com.pengrad.telegrambot.model.Message;
+import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.request.BaseRequest;
+import com.pengrad.telegrambot.request.SendMessage;
+import com.pengrad.telegrambot.request.SetWebhook;
 
-import static carTravel.common.Constants.Fields.*;
-public class Bot extends TelegramLongPollingBot {
-    @Override
-    public String getBotUsername() {
-        return botName;
+import static carTravel.common.Constants.Fields.http;
+import static carTravel.common.Constants.Fields.token;
+
+public class Bot {
+    private final TelegramBot bot = new TelegramBot(System.getenv("BOT_TOKEN"));
+
+    public void serve() {
+        bot.setUpdatesListener(updates -> {
+            updates.forEach(this::process);
+            return UpdatesListener.CONFIRMED_UPDATES_ALL;
+        });
+        SetWebhook request = new SetWebhook()
+                .url(http)
+                .certificate(new byte[]{}) // byte[]
+        ; // or file
     }
 
-    @Override
-    public String getBotToken() {
-        return token;
-    }
+    private void process(Update update) {
+        Message message = update.message();
+        CallbackQuery callbackQuery = update.callbackQuery();
+        InlineQuery inlineQuery = update.inlineQuery();
 
-    @Override
-    public void onRegister() {
-    }
+        BaseRequest request = null;
 
+        if (message != null) {
+            long chartId = message.chat().id();
+            request = new SendMessage(chartId, "Hello");
+        }
+        if (request != null) {
 
-    @Override
-    public void onUpdateReceived(Update update) {
-        if (update.hasMessage()) {
-            Message message = update.getMessage();
-            if (message.hasText()) {
-                try {
-                    execute(SendMessage.builder().chatId(message.getChatId().toString()).text(message.getText().toUpperCase()).build());
-                } catch (TelegramApiException e) {
-                    e.printStackTrace();
-                }
-
-            }
+            bot.execute(request);
         }
     }
 }
+
+
 
 
 
