@@ -1,8 +1,9 @@
 package carTravel.dto;
 
 import carTravel.entity.UserRole;
+import lombok.Data;
 import lombok.NonNull;
-
+@Data
 public class UsersDto {
 
     @NonNull
