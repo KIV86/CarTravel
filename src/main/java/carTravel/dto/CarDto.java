@@ -8,8 +8,7 @@ import lombok.NonNull;
 @AllArgsConstructor
 public class CarDto {
 
-    @NonNull
-    private Integer id;
+    private int id;
 
     @NonNull
     private String producerName;

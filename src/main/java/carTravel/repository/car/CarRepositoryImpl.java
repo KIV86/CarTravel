@@ -2,7 +2,7 @@ package carTravel.repository.car;
 
 import carTravel.dto.CarDto;
 import carTravel.entity.Car;
-import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,9 +10,13 @@ import java.util.Optional;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class CarRepositoryImpl {
-    CarRepository repository;
+
+    private final CarRepository repository;
+
+    public CarRepositoryImpl(@Lazy CarRepository repository) {
+        this.repository = repository;
+    }
 
     public void create(CarDto dto) {
         Car car = new Car();
@@ -22,7 +26,7 @@ public class CarRepositoryImpl {
         repository.save(car);
     }
 
-    public Car get(long id) {
+    public Car get(int id) {
         Car car = null;
         final Optional<Car> optionalCar = repository.findById(id);
         if (optionalCar.isPresent()){
@@ -32,7 +36,7 @@ public class CarRepositoryImpl {
 
     }
 
-    public void delete(long id) {
+    public void delete(int id) {
         repository.deleteById(id);
     }
 

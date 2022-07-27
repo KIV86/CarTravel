@@ -1,50 +1,47 @@
+/*
 package carTravel.common;
 
-import com.pengrad.telegrambot.TelegramBot;
-import com.pengrad.telegrambot.UpdatesListener;
-import com.pengrad.telegrambot.model.CallbackQuery;
-import com.pengrad.telegrambot.model.InlineQuery;
-import com.pengrad.telegrambot.model.Message;
-import com.pengrad.telegrambot.model.Update;
-import com.pengrad.telegrambot.request.BaseRequest;
-import com.pengrad.telegrambot.request.SendMessage;
-import com.pengrad.telegrambot.request.SetWebhook;
+import lombok.Data;
+import org.telegram.telegrambots.bots.TelegramWebhookBot;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.Update;
 
-import static carTravel.common.Constants.Fields.http;
-import static carTravel.common.Constants.Fields.token;
+@Data
+public class Bot extends TelegramWebhookBot {
+    Constants constants;
 
-public class Bot {
-    private final TelegramBot bot = new TelegramBot(System.getenv("BOT_TOKEN"));
 
-    public void serve() {
-        bot.setUpdatesListener(updates -> {
-            updates.forEach(this::process);
-            return UpdatesListener.CONFIRMED_UPDATES_ALL;
-        });
-        SetWebhook request = new SetWebhook()
-                .url(http)
-                .certificate(new byte[]{}) // byte[]
-        ; // or file
+    @Override
+
+    public String getBotUsername() {
+        return constants.getBotName();
     }
 
-    private void process(Update update) {
-        Message message = update.message();
-        CallbackQuery callbackQuery = update.callbackQuery();
-        InlineQuery inlineQuery = update.inlineQuery();
+    @Override
+    public String getBotToken() {
+        return constants.getToken();
+    }
 
-        BaseRequest request = null;
+    */
+/**
+     * обрабатывает входящий апдейт
+     *//*
 
-        if (message != null) {
-            long chartId = message.chat().id();
-            request = new SendMessage(chartId, "Hello");
-        }
-        if (request != null) {
+    @Override
+    public BotApiMethod<?> onWebhookUpdateReceived(Update update) {
 
-            bot.execute(request);
-        }
+         Message message =update.getMessage();
+         return message;
+    }
+
+    @Override
+    public String getBotPath() {
+        return constants.getHttp();
     }
 }
 
+*/
 
 
 

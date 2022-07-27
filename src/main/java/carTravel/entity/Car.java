@@ -1,6 +1,5 @@
 package carTravel.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -8,7 +7,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @RequiredArgsConstructor
-@Table(name = "carTravel.car")
+@Table(name = "car", schema = "cartravel")
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
