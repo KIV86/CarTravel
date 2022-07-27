@@ -9,7 +9,7 @@ import java.sql.Time;
 @Data
 @Entity
 @Accessors(chain = true)
-@Table(name = "carTravel.tasks")
+@Table(name = "tasks", schema = "cartravel")
 public class Issue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
