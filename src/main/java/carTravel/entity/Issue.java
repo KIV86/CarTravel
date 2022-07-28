@@ -32,11 +32,11 @@ public class Issue {
     @Column(name = "is_done")
     private Boolean isDone;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @OneToOne()
     @JoinColumn(name = "task_writer_id")
     private Users taskWriterId;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @OneToOne()
     @JoinColumn(name = "executor_id")
     private Users executorId;
 

@@ -2,12 +2,14 @@ package carTravel.repository.issue;
 
 import carTravel.dto.IssueDto;
 import carTravel.entity.Issue;
+import carTravel.entity.Users;
 import carTravel.repository.task.TaskRepository;
 import carTravel.repository.users.UsersRepository;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Time;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -53,21 +55,19 @@ public class IssueRepositoryImpl {
         return issue;
     }
 
-    public void deleteAllByPlanDateEndBefore(Time dateTime) {
-
-        repository.deleteAllByPlanDateEndBefore(dateTime);
+    public void deleteById(Integer id) {
+        repository.deleteById(id);
     }
 
-    public Issue getActualIssue() {
-        Issue issue = repository.findIssuesByIsDoneIsFalseOrderByPlanDateEndDesc();
-        return issue;
+    public List<Issue> getActualIssue() {
+        return repository.findIssueByIsDoneIsFalseOrderByPlanDateEndDesc();
     }
 
     public Issue getClosedIssue() {
         return repository.findIssuesByIsDoneIsTrueOrderByPlanDateEndDesc();
     }
 
-    public Issue getIssueByExecutor(Integer id) {
+    public List<Issue> getIssueByExecutor(Users id) {
         return repository.findIssuesByExecutorId(id);
 
     }

@@ -1,14 +1,20 @@
 package carTravel.repository.issue;
 
 import carTravel.entity.Issue;
+import carTravel.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.sql.Time;
+import java.util.List;
 
-public  interface  IssueRepository extends JpaRepository<Issue, Integer> {
-    Issue findIssuesByIsDoneIsFalseOrderByPlanDateEndDesc();
+public interface IssueRepository extends JpaRepository<Issue, Integer> {
+    List<Issue> findIssueByIsDoneIsFalseOrderByPlanDateEndDesc();
+
     Issue findIssuesByIsDoneIsTrueOrderByPlanDateEndDesc();
-    Issue findIssuesByExecutorId(Integer executorId);
-    void deleteAllByPlanDateEndBefore(Time dateTime);
 
-  }
+    List<Issue> findIssuesByExecutorId(Users executorId);
+
+    void deleteIssueById(Integer id);
+
+
+}
+

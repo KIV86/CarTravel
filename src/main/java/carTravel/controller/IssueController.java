@@ -2,15 +2,12 @@ package carTravel.controller;
 
 import carTravel.dto.IssueDto;
 import carTravel.entity.Issue;
+import carTravel.entity.Users;
 import carTravel.repository.issue.IssueRepositoryImpl;
-import carTravel.repository.task.TaskRepository;
-import carTravel.repository.users.UsersRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Time;
-import java.time.ZonedDateTime;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,10 +21,9 @@ public class IssueController {
         issueRepository.saveOrUpdate(entity);
     }
 
-    @DeleteMapping("/")
-    public void delete() {
-        Time time = Time.valueOf(ZonedDateTime.now().toLocalTime());
-        issueRepository.deleteAllByPlanDateEndBefore(time);
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable Integer id) {
+        issueRepository.deleteById(id);
     }
 
     @GetMapping("/{id}")
@@ -37,12 +33,12 @@ public class IssueController {
     }
 
     @GetMapping("/get-by-executor/{id}")
-    public Issue findByExecutor(@PathVariable Integer id) {
+    public List<Issue> findByExecutor(@PathVariable Users id) {
         return issueRepository.getIssueByExecutor(id);
     }
 
     @GetMapping("/actual-issues")
-    public Issue finActualIssue() {
+    public List<Issue> findActualIssue() {
         return issueRepository.getActualIssue();
     }
 
