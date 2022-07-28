@@ -1,54 +1,36 @@
 package carTravel.dto;
 
-import carTravel.entity.Issue;
-import carTravel.entity.Tasks;
-import carTravel.entity.Users;
-import lombok.*;
+import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
-import java.sql.Time;
+import java.time.LocalDateTime;
 
 @Data
+@RequiredArgsConstructor
+
 public class IssueDto {
 
-    @NonNull
-    private Integer id;
+    Integer id;
 
     @NonNull
     private String name;
 
     private String description;
 
-    @NonNull
-    private Time planDateStart;
+    private LocalDateTime planDateStart;
+
+    private LocalDateTime planDateEnd;
 
     @NonNull
-    private Time planDateEnd;
+    private Boolean isDone;
 
     @NonNull
-    private Boolean dateDone;
+    private Integer taskWriterId;
 
     @NonNull
-    private Users taskWriterId;
+    private Integer executorId;
 
     @NonNull
-    private Users executorId;
-
-    @NonNull
-    private Tasks tasks;
-
-    public IssueDto(@NonNull Integer id, @NonNull String name, String description, @NonNull Time planDateStart, @NonNull Time planDateEnd, @NonNull Boolean dateDone, @NonNull Users taskWriterId, @NonNull Users executorId, @NonNull Tasks tasks) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.planDateStart = planDateStart;
-        this.planDateEnd = planDateEnd;
-        this.dateDone = dateDone;
-        this.taskWriterId = taskWriterId;
-        this.executorId = executorId;
-        this.tasks = tasks;
-    }
-
-    public IssueDto(Issue byIdOrThrow) {
-
-    }
+    private Integer tasks;
 }

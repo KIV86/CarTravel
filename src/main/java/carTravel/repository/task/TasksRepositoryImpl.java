@@ -21,14 +21,14 @@ public class TasksRepositoryImpl {
         repository.save(task);
     }
 
-    public void update(Long id, TasksDto dto) {
+    public void update(Integer id, TasksDto dto) {
         Tasks task = get(id);
         task.setName(dto.getName());
         task.setIssues(dto.getIssues());
         repository.save(task);
     }
 
-    public Tasks get(long id) {
+    public Tasks get(Integer id) {
         Tasks task = null;
         final Optional<Tasks> optionalTasks = repository.findById(id);
         if (optionalTasks.isPresent()) {
@@ -38,7 +38,7 @@ public class TasksRepositoryImpl {
 
     }
 
-    public void delete(long id) {
+    public void delete(Integer id) {
         repository.deleteById(id);
     }
 }

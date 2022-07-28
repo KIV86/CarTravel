@@ -1,12 +1,11 @@
 package carTravel.dto;
 
-import carTravel.entity.UserRole;
 import lombok.Data;
 import lombok.NonNull;
+
 @Data
 public class UsersDto {
 
-    @NonNull
     private Integer id;
 
     @NonNull
@@ -16,5 +15,5 @@ public class UsersDto {
     private String account;
 
     @NonNull
-    private UserRole userRole;
+    private Integer userRole;
 }

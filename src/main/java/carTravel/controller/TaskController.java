@@ -19,17 +19,17 @@ public class TaskController {
 
     @DeleteMapping("/{id}")
     public void delete(
-            @PathVariable("id") Long id) {
+            @PathVariable("id") Integer id) {
         tasksRepository.delete(id);
     }
 
     @GetMapping("/{id}")
-    public Tasks findById(@PathVariable Long id) {
+    public Tasks findById(@PathVariable Integer id) {
         return tasksRepository.get(id);
     }
 
     @PutMapping("/{id}/dto")
-    public void update(@PathVariable Long id, @RequestBody TasksDto dto) {
+    public void update(@PathVariable Integer id, @RequestBody TasksDto dto) {
         tasksRepository.update(id, dto);
     }
 }

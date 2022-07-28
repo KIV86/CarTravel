@@ -1,20 +1,21 @@
 package carTravel.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Accessors(chain = true)
-@Table(name = "tasks", schema = "cartravel")
+@Table(name = "issue", schema = "cartravel")
 public class Issue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private Integer id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -23,23 +24,25 @@ public class Issue {
     private String description;
 
     @Column(name = "plan_date_start")
-    private Time planDateStart;
+    private LocalDateTime planDateStart;
 
     @Column(name = "plan_date_end")
-    private Time planDateEnd;
+    private LocalDateTime planDateEnd;
 
     @Column(name = "is_done")
     private Boolean isDone;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = " task_writer_id")
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "task_writer_id")
     private Users taskWriterId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = " executor_id")
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "executor_id")
     private Users executorId;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne()
     @JoinColumn(name = "tasks_id")
     private Tasks tasks;
+
 }

@@ -2,7 +2,8 @@ package carTravel.repository.issue;
 
 import carTravel.dto.IssueDto;
 import carTravel.entity.Issue;
-import carTravel.entity.Users;
+import carTravel.repository.task.TaskRepository;
+import carTravel.repository.users.UsersRepository;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,27 +14,37 @@ import java.util.Optional;
 public class IssueRepositoryImpl {
 
     private final IssueRepository repository;
+    private final UsersRepository usersRepository;
+    private final TaskRepository taskRepository;
 
-    public IssueRepositoryImpl(@Lazy IssueRepository repository) {
+    public IssueRepositoryImpl(@Lazy IssueRepository repository, UsersRepository user, TaskRepository taskRepository) {
         this.repository = repository;
+        this.usersRepository = user;
+        this.taskRepository = taskRepository;
     }
 
-    public Issue create(final IssueDto dto) {
+    public Issue saveOrUpdate(final IssueDto dto) {
+        final Integer executorId = dto.getExecutorId();
+        final Integer taskWriterId = dto.getTaskWriterId();
+        final Integer taskId = dto.getTasks();
+        final var executorUser = usersRepository.findById(executorId).orElse(null);
+        final var taskWriterUser = usersRepository.findById(taskWriterId).orElse(null);
+        final var task = taskRepository.findById(taskId).orElse(null);
         repository.save(new Issue()
                 .setIsDone(false)
                 .setDescription(dto.getDescription())
-                .setExecutorId(dto.getExecutorId())
+               .setExecutorId(executorUser)
                 .setName(dto.getName())
                 .setPlanDateStart(dto.getPlanDateStart())
-                .setTasks(dto.getTasks())
+                .setTasks(task)
                 .setPlanDateEnd(dto.getPlanDateEnd())
-                .setTaskWriterId(dto.getTaskWriterId()));
+                .setTaskWriterId(taskWriterUser));
         System.out.println("Вам назначена задача");
         return new Issue();
 
     }
 
-    public Issue get(long id) {
+    public Issue get(Integer id) {
         Issue issue = null;
         final Optional<Issue> optional = repository.findById(id);
         if (optional.isPresent()) {
@@ -42,15 +53,8 @@ public class IssueRepositoryImpl {
         return issue;
     }
 
-    public void update(long id, IssueDto dto) {
-        if (!dto.getTaskWriterId().equals(get(id).getTaskWriterId())) {
-            System.out.println("Вам назначена новая задача от " + get(id).getName());
-            stepOneForUpdate(id, dto);
-        }
-        stepOneForUpdate(id, dto);
-    }
-
     public void deleteAllByPlanDateEndBefore(Time dateTime) {
+
         repository.deleteAllByPlanDateEndBefore(dateTime);
     }
 
@@ -63,22 +67,9 @@ public class IssueRepositoryImpl {
         return repository.findIssuesByIsDoneIsTrueOrderByPlanDateEndDesc();
     }
 
-    public Issue getIssueByExecutor(Long id) {
+    public Issue getIssueByExecutor(Integer id) {
         return repository.findIssuesByExecutorId(id);
 
     }
 
-    public void stepOneForUpdate(long id, IssueDto dto) {
-        Issue issue = get(id);
-        repository.save(issue);
-        issue.setId(id);
-        issue.setIsDone(false);
-        issue.setDescription(dto.getDescription());
-        issue.setExecutorId(dto.getExecutorId());
-        issue.setName(dto.getName());
-        issue.setPlanDateStart(dto.getPlanDateStart());
-        issue.setTasks(dto.getTasks());
-        issue.setPlanDateEnd(dto.getPlanDateEnd());
-        issue.setTaskWriterId(dto.getTaskWriterId());
-    }
 }

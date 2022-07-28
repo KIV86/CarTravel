@@ -18,11 +18,11 @@ public class UserController {
     }
     @DeleteMapping("/{id}")
     public void delete(
-            @PathVariable("id") Long id) {
+            @PathVariable("id") Integer id) {
         usersRepository.delete(id);
     }
     @GetMapping("/{id}")
-    public Users findById(@PathVariable Long id) {
+    public Users findById(@PathVariable Integer id) {
         return usersRepository.get(id);
     }
 
