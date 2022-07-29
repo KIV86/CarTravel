@@ -8,9 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 @RequiredArgsConstructor
-
-public class IssueDto {
-
+public class IssueGetDto {
     Integer id;
 
     @NonNull
@@ -26,11 +24,12 @@ public class IssueDto {
     private Boolean isDone;
 
     @NonNull
-    private Integer taskWriterId;
+    private String taskWriterId;
 
     @NonNull
-    private Integer executorId;
+    private String executorId;
 
     @NonNull
-    private Integer tasks;
+    private String tasks;
+
 }

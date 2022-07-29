@@ -1,6 +1,7 @@
 package carTravel.controller;
 
-import carTravel.dto.IssueDto;
+import carTravel.dto.IssueGetDto;
+import carTravel.dto.IssueSaveDto;
 import carTravel.entity.Issue;
 import carTravel.entity.Users;
 import carTravel.repository.issue.IssueRepositoryImpl;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,7 +19,7 @@ public class IssueController {
     private final IssueRepositoryImpl issueRepository;
 
     @PostMapping
-    public void create(@RequestBody IssueDto entity) {
+    public void create(@RequestBody IssueSaveDto entity) {
         issueRepository.saveOrUpdate(entity);
     }
 
@@ -27,23 +29,22 @@ public class IssueController {
     }
 
     @GetMapping("/{id}")
-    public Issue findById(@PathVariable Integer id) {
-
+    public Optional<IssueGetDto> findById(@PathVariable Integer id) {
         return issueRepository.get(id);
     }
 
     @GetMapping("/get-by-executor/{id}")
-    public List<Issue> findByExecutor(@PathVariable Users id) {
+    public List<IssueGetDto> findByExecutor(@PathVariable Users id) {
         return issueRepository.getIssueByExecutor(id);
     }
 
     @GetMapping("/actual-issues")
-    public List<Issue> findActualIssue() {
+    public List<IssueGetDto> findActualIssue() {
         return issueRepository.getActualIssue();
     }
 
     @GetMapping("/closed-issues")
-    public Issue findClosedIssue() {
+    public List<IssueGetDto> findClosedIssue() {
         return issueRepository.getClosedIssue();
     }
 }

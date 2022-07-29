@@ -40,7 +40,6 @@ public class Issue {
     @JoinColumn(name = "executor_id")
     private Users executorId;
 
-    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name = "tasks_id")
     private Tasks tasks;

@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping(value = "/tasks")
 public class TaskController {
-    TasksRepositoryImpl tasksRepository;
+    private final TasksRepositoryImpl tasksRepository;
 
     @PostMapping
-    public void create(@RequestBody TasksDto entity) {
-        tasksRepository.create(entity);
+    public void saveOrUpdate(@RequestBody TasksDto entity) {
+        tasksRepository.saveOrUpdate(entity);
     }
 
     @DeleteMapping("/{id}")
@@ -26,10 +26,5 @@ public class TaskController {
     @GetMapping("/{id}")
     public Tasks findById(@PathVariable Integer id) {
         return tasksRepository.get(id);
-    }
-
-    @PutMapping("/{id}/dto")
-    public void update(@PathVariable Integer id, @RequestBody TasksDto dto) {
-        tasksRepository.update(id, dto);
     }
 }

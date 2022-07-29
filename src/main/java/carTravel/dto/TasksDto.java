@@ -1,15 +1,14 @@
 package carTravel.dto;
 
-import carTravel.entity.Issue;
 import lombok.Data;
-
-import java.util.List;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Data
+@RequiredArgsConstructor
 public class TasksDto {
     private Integer id;
 
+    @NonNull
     private String name;
-
-    private List<Issue> issues;
 }

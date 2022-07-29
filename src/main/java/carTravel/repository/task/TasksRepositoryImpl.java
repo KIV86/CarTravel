@@ -12,21 +12,14 @@ import java.util.Optional;
 @Transactional
 @RequiredArgsConstructor
 public class TasksRepositoryImpl {
-    TaskRepository repository;
+   private final TaskRepository repository;
 
-    public void create(TasksDto dto) {
-        Tasks task = new Tasks();
+    public Tasks saveOrUpdate(TasksDto dto) {
+       Tasks task = new Tasks();
         task.setName(dto.getName());
-        task.setIssues(dto.getIssues());
-        repository.save(task);
+       return repository.save(task);
     }
 
-    public void update(Integer id, TasksDto dto) {
-        Tasks task = get(id);
-        task.setName(dto.getName());
-        task.setIssues(dto.getIssues());
-        repository.save(task);
-    }
 
     public Tasks get(Integer id) {
         Tasks task = null;

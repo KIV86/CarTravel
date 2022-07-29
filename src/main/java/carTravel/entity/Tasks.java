@@ -1,10 +1,10 @@
 package carTravel.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Entity
@@ -12,12 +12,15 @@ import java.util.List;
 public class Tasks {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "tasks", orphanRemoval = true)
-    private List<Issue> issues = new ArrayList<>();
+/*    @OneToMany(mappedBy = "tasks", orphanRemoval = true)
+    private List<Issue> issues = new ArrayList<>();*/
+
+    public Tasks() {
+    }
 }
