@@ -1,8 +1,7 @@
 package carTravel.controller;
 
-import carTravel.dto.IssueGetDto;
-import carTravel.dto.IssueSaveDto;
-import carTravel.entity.Issue;
+import carTravel.dto.issues.IssueGetDto;
+import carTravel.dto.issues.IssueSaveDto;
 import carTravel.entity.Users;
 import carTravel.repository.issue.IssueRepositoryImpl;
 import lombok.RequiredArgsConstructor;

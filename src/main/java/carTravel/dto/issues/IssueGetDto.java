@@ -1,4 +1,4 @@
-package carTravel.dto;
+package carTravel.dto.issues;
 
 import lombok.Data;
 import lombok.NonNull;

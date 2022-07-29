@@ -1,6 +1,5 @@
 package carTravel.repository.issue;
 
-import carTravel.dto.IssueGetDto;
 import carTravel.entity.Issue;
 import carTravel.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;

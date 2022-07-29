@@ -1,6 +1,6 @@
 package carTravel.service.issueServise;
 
-import carTravel.dto.IssueGetDto;
+import carTravel.dto.issues.IssueGetDto;
 import carTravel.entity.Issue;
 import lombok.Data;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @Service
 @Transactional
-public class MapperEntityToDtoService {
+public class MapperEntityToDtoIssues {
     public List<IssueGetDto> mapperToListDto(List<Issue> entities) {
         List<IssueGetDto> list = new ArrayList<>();
         for (int i = 0; i < entities.size(); i++) {

@@ -1,12 +1,12 @@
 package carTravel.repository.issue;
 
-import carTravel.dto.IssueGetDto;
-import carTravel.dto.IssueSaveDto;
+import carTravel.dto.issues.IssueGetDto;
+import carTravel.dto.issues.IssueSaveDto;
 import carTravel.entity.Issue;
 import carTravel.entity.Users;
 import carTravel.repository.task.TaskRepository;
 import carTravel.repository.users.UsersRepository;
-import carTravel.service.issueServise.MapperEntityToDtoService;
+import carTravel.service.issueServise.MapperEntityToDtoIssues;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,9 +19,9 @@ public class IssueRepositoryImpl {
     private final IssueRepository repository;
     private final UsersRepository usersRepository;
     private final TaskRepository taskRepository;
-    private final MapperEntityToDtoService mapper;
+    private final MapperEntityToDtoIssues mapper;
 
-    public IssueRepositoryImpl(@Lazy IssueRepository repository, UsersRepository user, TaskRepository taskRepository, MapperEntityToDtoService mapper) {
+    public IssueRepositoryImpl(@Lazy IssueRepository repository, UsersRepository user, TaskRepository taskRepository, MapperEntityToDtoIssues mapper) {
         this.repository = repository;
         this.usersRepository = user;
         this.taskRepository = taskRepository;
@@ -55,7 +55,6 @@ public class IssueRepositoryImpl {
             issue = optional.get();
             final IssueGetDto value = mapper.mapperToDto(issue);
             dto = Optional.ofNullable(value);
-
         }
         return dto;
     }
