@@ -3,7 +3,7 @@ package carTravel.controller;
 import carTravel.dto.issues.IssueGetDto;
 import carTravel.dto.issues.IssueSaveDto;
 import carTravel.entity.Users;
-import carTravel.repository.issue.IssueRepositoryImpl;
+import carTravel.service.issueServise.IssueRepositoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequestMapping(value = "/issues")
 public class IssueController {
 
-    private final IssueRepositoryImpl issueRepository;
+    private final IssueRepositoryService issueRepository;
 
     @PostMapping
     public void create(@RequestBody IssueSaveDto entity) {

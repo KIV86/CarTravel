@@ -1,6 +1,7 @@
 package carTravel.service.issueServise;
 
 import carTravel.dto.issues.IssueGetDto;
+import carTravel.dto.issues.IssueSaveDto;
 import carTravel.entity.Issue;
 import lombok.Data;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Data
 @Service
-public class MapperService {
+public class MapperServiceIssue {
     public List<IssueGetDto> mapperToListDto(List<Issue> entities) {
         return entities.stream()
                 .map(this::mapperToDto)
@@ -21,6 +22,9 @@ public class MapperService {
         return new IssueGetDto(
                 entity.getId(),
                 entity.getName(),
+                entity.getDescription(),
+                entity.getPlanDateStart(),
+                entity.getPlanDateEnd(),
                 entity.getIsDone(),
                 entity.getTaskWriterId().getName(),
                 entity.getExecutorId().getName(),

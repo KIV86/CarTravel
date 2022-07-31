@@ -1,8 +1,8 @@
-package carTravel.repository.car;
+package carTravel.service.carServise;
 
 import carTravel.dto.CarDto;
 import carTravel.entity.Car;
-import carTravel.service.carServise.MapperEntityToDtoCar;
+import carTravel.repository.car.CarRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,20 +16,10 @@ import java.util.Optional;
 public class CarRepositoryService {
 
     private final CarRepository repository;
-    private final MapperEntityToDtoCar mapper;
-
-//    public CarRepositoryImpl(CarRepository repository, MapperEntityToDtoCar mapper) {
-//        this.repository = repository;
-//        this.mapper = mapper;
-//    }
-
+    private final MapperServiceCar mapper;
 
     public void create(CarDto dto) {
-        Car car = new Car();
-        car.setCarNumber(dto.getCarNumber());
-        car.setModelName(dto.getModelName());
-        car.setProducerName(dto.getProducerName());
-        repository.save(car);
+        mapper.mapperDtoToEntity(dto);
     }
 
     public Optional<CarDto> get(int id) {
@@ -38,11 +28,10 @@ public class CarRepositoryService {
         final Optional<Car> optionalCar = repository.findById(id);
         if (optionalCar.isPresent()) {
             car = optionalCar.get();
-            final CarDto value = mapper.mapperToDto(car);
+            final CarDto value = mapper.mapperEntitnyToDto(car);
             dto = Optional.ofNullable(value);
         }
         return dto;
-
     }
 
     public void delete(int id) {
@@ -51,8 +40,7 @@ public class CarRepositoryService {
 
     public List<CarDto> findAll() {
         return mapper
-                .mapperToListDto(
-                repository.findAll());
+                .mapperListEntityToListDto(
+                        repository.findAll());
     }
-
 }

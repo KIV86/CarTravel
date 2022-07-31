@@ -24,6 +24,4 @@ public class Users {
     @OneToOne(cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
     @JoinColumn(name = "user_role_id", nullable = false)
     private UserRole userRole;
-
-
 }

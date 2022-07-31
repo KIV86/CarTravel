@@ -1,27 +1,29 @@
-package carTravel.repository.issue;
+package carTravel.service.issueServise;
 
 import carTravel.dto.issues.IssueGetDto;
 import carTravel.dto.issues.IssueSaveDto;
 import carTravel.entity.Issue;
 import carTravel.entity.Users;
+import carTravel.repository.issue.IssueRepository;
 import carTravel.repository.task.TaskRepository;
 import carTravel.repository.users.UsersRepository;
-import carTravel.service.issueServise.MapperEntityToDtoIssues;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 @Transactional
-public class IssueRepositoryImpl {
+public class IssueRepositoryService {
 
     private final IssueRepository repository;
     private final UsersRepository usersRepository;
     private final TaskRepository taskRepository;
-    private final MapperEntityToDtoIssues mapper;
+    private final MapperServiceIssue mapper;
 
-    public IssueRepositoryImpl(@Lazy IssueRepository repository, UsersRepository user, TaskRepository taskRepository, MapperEntityToDtoIssues mapper) {
+    public IssueRepositoryService(@Lazy IssueRepository repository, UsersRepository user, TaskRepository taskRepository, MapperServiceIssue mapper) {
         this.repository = repository;
         this.usersRepository = user;
         this.taskRepository = taskRepository;
@@ -44,7 +46,6 @@ public class IssueRepositoryImpl {
                 .setTasks(task)
                 .setPlanDateEnd(dto.getPlanDateEnd())
                 .setTaskWriterId(taskWriterUser));
-
     }
 
     public Optional<IssueGetDto> get(Integer id) {
@@ -75,7 +76,5 @@ public class IssueRepositoryImpl {
     public List<IssueGetDto> getIssueByExecutor(Users id) {
         final var issuesByExecutorId = repository.findIssuesByExecutorId(id);
         return mapper.mapperToListDto(issuesByExecutorId);
-
     }
-
 }

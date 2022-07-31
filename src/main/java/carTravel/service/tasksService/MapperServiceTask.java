@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 @Service
-public class MapperService {
+public class MapperServiceTask {
 
     public TasksDto mapperToDto(Tasks entity) {
         return new TasksDto(

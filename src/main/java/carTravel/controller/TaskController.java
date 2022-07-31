@@ -1,7 +1,7 @@
 package carTravel.controller;
 
 import carTravel.dto.tasks.TasksDto;
-import carTravel.repository.task.TasksRepositoryImpl;
+import carTravel.service.tasksService.TasksRepositoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping(value = "/tasks")
 public class TaskController {
-    private final TasksRepositoryImpl tasksRepository;
+    private final TasksRepositoryService tasksRepository;
 
     @PostMapping
     public void saveOrUpdate(@RequestBody TasksDto entity) {
@@ -29,7 +29,9 @@ public class TaskController {
     public Optional<TasksDto> findById(@PathVariable Integer id) {
         return tasksRepository.get(id);
 
-    }  @GetMapping("/find-all")
+    }
+
+    @GetMapping("/find-all")
     public List<TasksDto> findAll() {
         return tasksRepository.findAll();
     }

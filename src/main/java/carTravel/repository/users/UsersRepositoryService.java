@@ -4,7 +4,6 @@ import carTravel.dto.UsersDto;
 import carTravel.entity.UserRole;
 import carTravel.entity.Users;
 import carTravel.repository.userRole.UserRoleRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,11 +12,11 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class UsersRepositoryImpl {
+public class UsersRepositoryService {
     private final UsersRepository repository;
     public final UserRoleRepository userRoleRepository;
 
-    public UsersRepositoryImpl(@Lazy UsersRepository repository, UserRoleRepository userRoleRepository) {
+    public UsersRepositoryService(@Lazy UsersRepository repository, UserRoleRepository userRoleRepository) {
         this.repository = repository;
         this.userRoleRepository = userRoleRepository;
     }

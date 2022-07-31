@@ -1,12 +1,14 @@
 package carTravel.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+
 @Data
 @Entity
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Table(name = "car", schema = "cartravel")
 public class Car {
     @Id
@@ -22,4 +24,5 @@ public class Car {
 
     @Column(name = "car_number", unique = true, length = 10)
     private String carNumber;
+
 }

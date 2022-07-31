@@ -1,15 +1,16 @@
 package carTravel.dto.issues;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class IssueGetDto {
-    Integer id;
+
+    private Integer id;
 
     @NonNull
     private String name;
@@ -31,5 +32,4 @@ public class IssueGetDto {
 
     @NonNull
     private String tasks;
-
 }

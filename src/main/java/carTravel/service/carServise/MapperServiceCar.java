@@ -4,14 +4,13 @@ import carTravel.dto.CarDto;
 import carTravel.entity.Car;
 import lombok.Data;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
 @Service
-public class MapperService {
+public class MapperServiceCar {
     public List<CarDto> mapperListEntityToListDto(List<Car> entities) {
 
         return entities.stream()

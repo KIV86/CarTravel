@@ -14,6 +14,4 @@ public class TasksDto {
 
     @NonNull
     private String name;
-
-
 }
