@@ -1,20 +1,16 @@
 package carTravel.service.tasksService;
 
-import carTravel.dto.issues.IssueGetDto;
 import carTravel.dto.tasks.TasksDto;
-import carTravel.entity.Issue;
 import carTravel.entity.Tasks;
 import lombok.Data;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Service
-@Transactional
-public class MapperEntityToDtoTasks {
+public class MapperService {
 
     public TasksDto mapperToDto(Tasks entity) {
         return new TasksDto(
