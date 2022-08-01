@@ -1,35 +1,38 @@
 package carTravel.controller;
 
-import carTravel.dto.TasksDto;
-import carTravel.entity.Tasks;
-import carTravel.repository.task.TasksRepositoryImpl;
+import carTravel.dto.tasks.TasksDto;
+import carTravel.service.tasksService.TasksRepositoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/tasks")
 public class TaskController {
-    TasksRepositoryImpl tasksRepository;
+    private final TasksRepositoryService tasksRepository;
 
     @PostMapping
-    public void create(@RequestBody TasksDto entity) {
-        tasksRepository.create(entity);
+    public void saveOrUpdate(@RequestBody TasksDto entity) {
+        tasksRepository.saveOrUpdate(entity);
     }
 
     @DeleteMapping("/{id}")
     public void delete(
-            @PathVariable("id") Long id) {
+            @PathVariable("id") Integer id) {
         tasksRepository.delete(id);
     }
 
     @GetMapping("/{id}")
-    public Tasks findById(@PathVariable Long id) {
+    public Optional<TasksDto> findById(@PathVariable Integer id) {
         return tasksRepository.get(id);
+
     }
 
-    @PutMapping("/{id}/dto")
-    public void update(@PathVariable Long id, @RequestBody TasksDto dto) {
-        tasksRepository.update(id, dto);
+    @GetMapping("/find-all")
+    public List<TasksDto> findAll() {
+        return tasksRepository.findAll();
     }
 }

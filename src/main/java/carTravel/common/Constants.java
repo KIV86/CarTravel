@@ -8,6 +8,7 @@ import lombok.experimental.FieldNameConstants;
 @FieldNameConstants
 @AllArgsConstructor
 public class Constants {
-    private String token = "2123329401:AAHFiNUuFffg-XaP3f9mIQZbajp2LMclbOA";
-    private String botName = "CarTravel";
+    private final String token = "2123329401:AAHFiNUuFffg-XaP3f9mIQZbajp2LMclbOA";
+    private final String botName = "CarTravel";
+    private final String http = "https://4dbd-45-157-214-233.eu.ngrok.io";
 }

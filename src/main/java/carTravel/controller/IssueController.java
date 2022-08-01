@@ -1,53 +1,49 @@
 package carTravel.controller;
 
-import carTravel.dto.IssueDto;
-import carTravel.dto.TasksDto;
-import carTravel.entity.Issue;
-import carTravel.entity.Tasks;
-import carTravel.repository.issue.IssueRepositoryImpl;
+import carTravel.dto.issues.IssueGetDto;
+import carTravel.dto.issues.IssueSaveDto;
+import carTravel.entity.Users;
+import carTravel.service.issueServise.IssueRepositoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/issues")
 public class IssueController {
 
-    IssueRepositoryImpl issueRepository;
+    private final IssueRepositoryService issueRepository;
 
     @PostMapping
-    public void create(@RequestBody IssueDto entity) {
-        issueRepository.create(entity);
+    public void create(@RequestBody IssueSaveDto entity) {
+        issueRepository.saveOrUpdate(entity);
     }
 
-    @DeleteMapping("/")
-    public void delete() {
-        Time time = Time.valueOf(ZonedDateTime.now().toLocalTime());
-        issueRepository.deleteAllByPlanDateEndBefore(time);
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable Integer id) {
+        issueRepository.deleteById(id);
     }
-    @PutMapping("/{id}/dto")
-    public void update(@PathVariable Long id, @RequestBody IssueDto dto) {
-        issueRepository.update(id, dto);
-    }
+
     @GetMapping("/{id}")
-    public Issue findById(@PathVariable Long id) {
+    public Optional<IssueGetDto> findById(@PathVariable Integer id) {
         return issueRepository.get(id);
     }
-    @GetMapping("/{executor-id}")
-        public Issue findByExecutor(@PathVariable Long id) {
+
+    @GetMapping("/get-by-executor/{id}")
+    public List<IssueGetDto> findByExecutor(@PathVariable Users id) {
         return issueRepository.getIssueByExecutor(id);
     }
 
     @GetMapping("/actual-issues")
-    public Issue finActualIssue() {
+    public List<IssueGetDto> findActualIssue() {
         return issueRepository.getActualIssue();
     }
+
     @GetMapping("/closed-issues")
-    public Issue findClosedIssue() {
+    public List<IssueGetDto> findClosedIssue() {
         return issueRepository.getClosedIssue();
     }
 }

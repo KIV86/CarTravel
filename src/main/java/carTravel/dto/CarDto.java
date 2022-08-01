@@ -1,15 +1,14 @@
 package carTravel.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NonNull;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class CarDto {
 
-    @NonNull
-    private Integer id;
+    private int id;
 
     @NonNull
     private String producerName;

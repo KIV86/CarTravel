@@ -1,30 +1,38 @@
 package carTravel.controller;
 
 import carTravel.dto.CarDto;
-import carTravel.entity.Car;
-import carTravel.repository.car.CarRepositoryImpl;
+import carTravel.service.carServise.CarRepositoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/car")
 public class CarController {
-    CarRepositoryImpl CarRepositoryImpl;
+
+    private final CarRepositoryService carRepositoryService;
 
     @PostMapping
     public void create(@RequestBody CarDto entity) {
-        CarRepositoryImpl.create(entity);
+        carRepositoryService.create(entity);
     }
 
     @DeleteMapping("/{id}")
     public void delete(
-            @PathVariable("id") Long id) {
-        CarRepositoryImpl.delete(id);
+            @PathVariable("id") int id) {
+        carRepositoryService.delete(id);
     }
 
     @GetMapping("/{id}")
-    public Car findById(@PathVariable Long id) {
-        return CarRepositoryImpl.get(id);
+    public Optional<CarDto> findById(@PathVariable int id) {
+        return carRepositoryService.get(id);
+    }
+
+    @GetMapping("/find-all")
+    public List<CarDto> findAll() {
+        return carRepositoryService.findAll();
     }
 }

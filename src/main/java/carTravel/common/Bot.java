@@ -1,43 +1,48 @@
+/*
 package carTravel.common;
 
-import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import lombok.Data;
+import org.telegram.telegrambots.bots.TelegramWebhookBot;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import static carTravel.common.Constants.Fields.*;
-public class Bot extends TelegramLongPollingBot {
+@Data
+public class Bot extends TelegramWebhookBot {
+    Constants constants;
+
+
     @Override
+
     public String getBotUsername() {
-        return botName;
+        return constants.getBotName();
     }
 
     @Override
     public String getBotToken() {
-        return token;
+        return constants.getToken();
+    }
+
+    */
+/**
+     * обрабатывает входящий апдейт
+     *//*
+
+    @Override
+    public BotApiMethod<?> onWebhookUpdateReceived(Update update) {
+
+         Message message =update.getMessage();
+         return message;
     }
 
     @Override
-    public void onRegister() {
-    }
-
-
-    @Override
-    public void onUpdateReceived(Update update) {
-        if (update.hasMessage()) {
-            Message message = update.getMessage();
-            if (message.hasText()) {
-                try {
-                    execute(SendMessage.builder().chatId(message.getChatId().toString()).text(message.getText().toUpperCase()).build());
-                } catch (TelegramApiException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }
+    public String getBotPath() {
+        return constants.getHttp();
     }
 }
+
+*/
+
 
 
 

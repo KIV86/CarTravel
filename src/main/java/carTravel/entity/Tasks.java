@@ -3,21 +3,22 @@ package carTravel.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Entity
-@Table(name = "carTravel.tasks")
+@Table(name = "tasks", schema = "carTravel")
 public class Tasks {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "tasks", orphanRemoval = true)
-    private List<Issue> issues = new ArrayList<>();
+/*    @OneToMany(mappedBy = "tasks", orphanRemoval = true)
+    private List<Issue> issues = new ArrayList<>();*/
+
+    public Tasks() {
+    }
 }

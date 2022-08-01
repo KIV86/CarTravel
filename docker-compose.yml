@@ -7,7 +7,7 @@ services:
     environment:
       DB_HOST: app_db
     ports:
-      - 8080:8080
+      - 9000:8080
     depends_on:
       - app_db
     links:
