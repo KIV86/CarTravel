@@ -19,7 +19,7 @@ public class IssueController {
 
     @PostMapping
     public void create(@RequestBody IssueSaveDto entity) {
-        issueRepository.saveOrUpdate(entity);
+        issueRepository.save(entity);
     }
 
     @DeleteMapping("{id}")

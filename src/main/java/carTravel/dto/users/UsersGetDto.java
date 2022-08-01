@@ -1,10 +1,12 @@
-package carTravel.dto;
+package carTravel.dto.users;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NonNull;
 
 @Data
-public class UsersDto {
+@AllArgsConstructor
+public class UsersGetDto {
 
     private Integer id;
 
@@ -15,5 +17,5 @@ public class UsersDto {
     private String account;
 
     @NonNull
-    private Integer userRole;
+    private String role;
 }

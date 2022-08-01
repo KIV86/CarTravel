@@ -1,35 +1,35 @@
 package carTravel.controller;
 
-import carTravel.dto.UsersDto;
-import carTravel.entity.Users;
-import carTravel.repository.users.UsersRepositoryService;
+import carTravel.dto.users.UsersDto;
+import carTravel.dto.users.UsersGetDto;
+import carTravel.service.userService.UsersRepositoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/users")
 public class UserController {
-    UsersRepositoryService usersRepository;
+
+   private final UsersRepositoryService service;
 
     @PostMapping
     public void create(@RequestBody UsersDto entity) {
-        usersRepository.create(entity);
+
+        service.create(entity);
     }
 
     @DeleteMapping("/{id}")
     public void delete(
             @PathVariable("id") Integer id) {
-        usersRepository.delete(id);
+        service.delete(id);
     }
 
     @GetMapping("/{id}")
-    public Users findById(@PathVariable Integer id) {
-        return usersRepository.get(id);
+    public Optional<UsersGetDto> findById(@PathVariable Integer id) {
+        return service.get(id);
     }
 
-/*    @PutMapping("/{id}/dto")
-    public void update(@PathVariable Long id, @RequestBody CarDto dto) {
-        return usersRepository.update(id, dto);
-    }*/
 }

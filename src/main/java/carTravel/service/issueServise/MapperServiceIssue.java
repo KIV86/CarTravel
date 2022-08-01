@@ -22,9 +22,9 @@ public class MapperServiceIssue {
         return new IssueGetDto(
                 entity.getId(),
                 entity.getName(),
-                entity.getDescription(),
                 entity.getPlanDateStart(),
                 entity.getPlanDateEnd(),
+                entity.getDateDone(),
                 entity.getIsDone(),
                 entity.getTaskWriterId().getName(),
                 entity.getExecutorId().getName(),

@@ -1,4 +1,4 @@
-CREATE SCHEMA IF NOT EXISTS carTravel ;
+CREATE SCHEMA IF NOT EXISTS carTravel;
 
 create table carTravel.user_role
 (
@@ -25,11 +25,11 @@ create table carTravel.tasks
 create table carTravel.issue
 (
     id              serial primary key,
-    is_done       boolean,
+    is_done         boolean,
     description     varchar(255),
     name            varchar(255) not null,
-    plan_date_end   time,
-    plan_date_start time,
+    plan_date_end   timestamptz,
+    plan_date_start timestamptz,
     task_writer_id  integer,
     executor_id     integer,
     tasks_id        integer,

@@ -14,14 +14,14 @@ public class Users {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "name", unique = true)
+    @Column(name = "name")
     @Type(type = "org.hibernate.type.TextType")
     private String name;
 
     @Column(name = "account", nullable = false, unique = true)
     private String account;
 
-    @OneToOne(cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
+    @OneToOne()
     @JoinColumn(name = "user_role_id", nullable = false)
     private UserRole userRole;
 }

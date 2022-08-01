@@ -2,6 +2,7 @@ package carTravel.service.issueServise;
 
 import carTravel.dto.issues.IssueGetDto;
 import carTravel.dto.issues.IssueSaveDto;
+import carTravel.dto.issues.IssueUpdateDto;
 import carTravel.entity.Issue;
 import carTravel.entity.Users;
 import carTravel.repository.issue.IssueRepository;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +32,7 @@ public class IssueRepositoryService {
         this.mapper = mapper;
     }
 
-    public Issue saveOrUpdate(final IssueSaveDto dto) {
+    public Issue save(final IssueSaveDto dto) {
         final Integer executorId = dto.getExecutorId();
         final Integer taskWriterId = dto.getTaskWriterId();
         final Integer taskId = dto.getTasks();
@@ -39,14 +41,16 @@ public class IssueRepositoryService {
         final var task = taskRepository.findById(taskId).orElse(null);
         return repository.save(new Issue()
                 .setIsDone(false)
-                .setDescription(dto.getDescription())
                 .setExecutorId(executorUser)
                 .setName(dto.getName())
-                .setPlanDateStart(dto.getPlanDateStart())
+                .setPlanDateStart(LocalDateTime.now())
+                .setDateDone(dto.getPlanDateEnd())
                 .setTasks(task)
                 .setPlanDateEnd(dto.getPlanDateEnd())
                 .setTaskWriterId(taskWriterUser));
     }
+    public void update(IssueUpdateDto dto){}
+
 
     public Optional<IssueGetDto> get(Integer id) {
         Issue issue = null;

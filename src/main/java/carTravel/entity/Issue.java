@@ -28,6 +28,9 @@ public class Issue {
     @Column(name = "plan_date_end")
     private LocalDateTime planDateEnd;
 
+    @Column(name = "date_done")
+    private LocalDateTime dateDone;
+
     @Column(name = "is_done")
     private Boolean isDone;
 

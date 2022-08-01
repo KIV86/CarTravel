@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NonNull;
 
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 @Data
@@ -12,14 +13,14 @@ public class IssueGetDto {
 
     private Integer id;
 
-    @NonNull
+    @NotEmpty
     private String name;
-
-    private String description;
 
     private LocalDateTime planDateStart;
 
     private LocalDateTime planDateEnd;
+
+    private LocalDateTime dateDone;
 
     @NonNull
     private Boolean isDone;
