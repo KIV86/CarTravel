@@ -1,47 +1,22 @@
-/*
 package carTravel.common;
 
-import lombok.Data;
-import org.telegram.telegrambots.bots.TelegramWebhookBot;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.Update;
-
-@Data
-public class Bot extends TelegramWebhookBot {
-    Constants constants;
+import org.telegram.telegrambots.bots.DefaultAbsSender;
+import org.telegram.telegrambots.bots.DefaultBotOptions;
 
 
-    @Override
+public class Bot extends DefaultAbsSender {
 
-    public String getBotUsername() {
-        return constants.getBotName();
+    public Bot(DefaultBotOptions options) {
+        super(options);
     }
 
     @Override
     public String getBotToken() {
-        return constants.getToken();
-    }
-
-    */
-/**
-     * обрабатывает входящий апдейт
-     *//*
-
-    @Override
-    public BotApiMethod<?> onWebhookUpdateReceived(Update update) {
-
-         Message message =update.getMessage();
-         return message;
-    }
-
-    @Override
-    public String getBotPath() {
-        return constants.getHttp();
+//        return Constants.Fields.token;
+return getBaseUrl();
     }
 }
 
-*/
 
 
 
