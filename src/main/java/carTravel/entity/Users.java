@@ -4,6 +4,8 @@ import lombok.Data;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Data
 @Entity
@@ -14,10 +16,14 @@ public class Users {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @NotBlank(message = "Имя пользователя не моджет быть пыстым")
+    @Size(min = 4, message = "Больше букв плиз, необходимо минимум 4 символов")
     @Column(name = "name")
     @Type(type = "org.hibernate.type.TextType")
     private String name;
 
+    @NotBlank(message = "аккаунт пользователя не моджет быть пыстым")
+    @Size(min = 4, message = "Больше букв плиз, необходимо минимум 4 символов")
     @Column(name = "account", nullable = false, unique = true)
     private String account;
 
