@@ -4,9 +4,12 @@ import carTravel.dto.tasks.TasksDto;
 import carTravel.service.tasksService.TasksRepositoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
+import javax.validation.ValidationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,23 +20,25 @@ public class TaskController {
     private final TasksRepositoryService tasksRepository;
 
     @PostMapping
-    public void saveOrUpdate(@RequestBody TasksDto entity) {
-        tasksRepository.saveOrUpdate(entity);
+    public void saveOrUpdate(@Valid @RequestBody TasksDto entity, Errors errors) {
+        if (!errors.hasErrors()) {
+            tasksRepository.saveOrUpdate(entity);
+        } else throw new ValidationException("--> НЕ КОРРЕКТНО ВВЕДЕННЫЕ ДАННЫЕ");
     }
 
     @DeleteMapping("/{id}")
     public void delete(
             @PathVariable("id") Integer id) {
-        if (id!=null){
+        if (id != null) {
             tasksRepository.delete(id);
-        }else {
+        } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "--> НЕСУЖЕСТВУЮЩИЙ ID");
         }
     }
 
     @GetMapping("/{id}")
     public Optional<TasksDto> findById(@PathVariable Integer id) {
-        return Optional.ofNullable(tasksRepository.get(id)).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "--> ПО ДАННОМУ ID НЕ НАЙДЕНА ГЛОБАЛЬНАЯ ЗАДАЧА"));
+        return Optional.ofNullable(tasksRepository.get(id)).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "--> ПО ДАННОМУ ID НЕ НАЙДЕНА ГЛОБАЛЬНАЯ ЗАДАЧА"));
     }
 
     @GetMapping("/find-all")

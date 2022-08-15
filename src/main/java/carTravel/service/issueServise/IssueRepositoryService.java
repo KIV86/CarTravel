@@ -77,7 +77,7 @@ public class IssueRepositoryService {
         return mapper.mapperToListDto(repository.findIssuesByIsDoneIsTrueOrderByPlanDateEndDesc());
     }
 
-    public List<IssueGetDto> getIssueByExecutor(Users id) {
+    public List<IssueGetDto> getIssueByExecutor(Integer id) {
         final var issuesByExecutorId = repository.findIssuesByExecutorId(id);
         return mapper.mapperToListDto(issuesByExecutorId);
     }

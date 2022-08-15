@@ -5,9 +5,12 @@ import carTravel.dto.users.UsersGetDto;
 import carTravel.service.userService.UsersRepositoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
+import javax.validation.ValidationException;
 import java.util.Optional;
 
 @RestController
@@ -18,8 +21,10 @@ public class UserController {
     private final UsersRepositoryService service;
 
     @PostMapping
-    public void create(@RequestBody UsersDto entity) {
-        service.create(entity);
+    public void create(@Valid @RequestBody UsersDto entity, Errors errors) {
+        if (!errors.hasErrors()) {
+            service.create(entity);
+        } else throw new ValidationException(" --> ВВЕДЕНЫ НЕ КОРРЕКТНЫЕ ДАННЫЕ");
     }
 
     @DeleteMapping("/{id}")
