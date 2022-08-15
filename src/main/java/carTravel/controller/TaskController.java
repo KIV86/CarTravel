@@ -3,7 +3,9 @@ package carTravel.controller;
 import carTravel.dto.tasks.TasksDto;
 import carTravel.service.tasksService.TasksRepositoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,13 +24,16 @@ public class TaskController {
     @DeleteMapping("/{id}")
     public void delete(
             @PathVariable("id") Integer id) {
-        tasksRepository.delete(id);
+        if (id!=null){
+            tasksRepository.delete(id);
+        }else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "--> НЕСУЖЕСТВУЮЩИЙ ID");
+        }
     }
 
     @GetMapping("/{id}")
     public Optional<TasksDto> findById(@PathVariable Integer id) {
-        return tasksRepository.get(id);
-
+        return Optional.ofNullable(tasksRepository.get(id)).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "--> ПО ДАННОМУ ID НЕ НАЙДЕНА ГЛОБАЛЬНАЯ ЗАДАЧА"));
     }
 
     @GetMapping("/find-all")

@@ -4,7 +4,9 @@ import carTravel.dto.users.UsersDto;
 import carTravel.dto.users.UsersGetDto;
 import carTravel.service.userService.UsersRepositoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
@@ -13,23 +15,25 @@ import java.util.Optional;
 @RequestMapping(value = "/users")
 public class UserController {
 
-   private final UsersRepositoryService service;
+    private final UsersRepositoryService service;
 
     @PostMapping
     public void create(@RequestBody UsersDto entity) {
-
         service.create(entity);
     }
 
     @DeleteMapping("/{id}")
     public void delete(
             @PathVariable("id") Integer id) {
-        service.delete(id);
+        if (id != null) {
+            service.delete(id);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "--> НЕСУЖЕСТВУЮЩИЙ ID");
+        }
     }
 
     @GetMapping("/{id}")
     public Optional<UsersGetDto> findById(@PathVariable Integer id) {
-        return service.get(id);
+        return Optional.ofNullable(service.get(id)).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "--> ПО ДАННОМУ ID НЕ НАЙДЕН ПОЛЬЗОВАТЕЛЬ"));
     }
-
 }
