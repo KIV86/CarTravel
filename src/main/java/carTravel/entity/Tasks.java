@@ -1,6 +1,7 @@
 package carTravel.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -8,6 +9,7 @@ import javax.validation.constraints.Size;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "tasks", schema = "carTravel")
 public class Tasks {
     @Id
@@ -22,7 +24,4 @@ public class Tasks {
 
 /*    @OneToMany(mappedBy = "tasks", orphanRemoval = true)
     private List<Issue> issues = new ArrayList<>();*/
-
-    public Tasks() {
-    }
 }

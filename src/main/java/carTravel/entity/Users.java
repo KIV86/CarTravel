@@ -1,6 +1,7 @@
 package carTravel.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Size;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "users", schema = "carTravel")
 public class Users {
     @Id
