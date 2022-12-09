@@ -32,6 +32,11 @@ public class IssueRepositoryService {
         this.mapper = mapper;
     }
 
+    /**
+     * Добавление нового автомобиля в базу
+     * @param dto
+     * @return
+     */
     public Issue save(final IssueSaveDto dto) {
         final Integer executorId = dto.getExecutorId();
         final Integer taskWriterId = dto.getTaskWriterId();
@@ -49,6 +54,7 @@ public class IssueRepositoryService {
                 .setPlanDateEnd(dto.getPlanDateEnd())
                 .setTaskWriterId(taskWriterUser));
     }
+
     public void update(IssueUpdateDto dto){}
 
 
