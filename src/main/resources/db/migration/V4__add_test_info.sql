@@ -24,16 +24,13 @@ VALUES (1, '@Andrew', 'Андрей', 1);
 INSERT INTO cartravel.users
 VALUES (2, '@Dima', 'Дима', 2);
 
-INSERT INTO cartravel.issue (id, name, executor_id, plan_date_start, plan_date_end, date_done, task_writer_id, tasks_id)
+INSERT INTO cartravel.issue (id, name, executor_id, plan_date_start, plan_date_end, task_writer_id, tasks_id)
 VALUES (1, 'помыть авто', 2, '2022-06-23T05:55:55'::timestamptz AT TIME ZONE 'Europe/Moscow',
-        '2022-06-24T05:55:55'::timestamptz AT TIME ZONE 'Europe/Moscow',
-        '2022-06-25T05:55:55'::timestamptz AT TIME ZONE 'Europe/Moscow', 1, 3);
-INSERT INTO cartravel.issue (id, name, executor_id, plan_date_start, plan_date_end, date_done, task_writer_id, tasks_id)
+        '2022-06-24T05:55:55'::timestamptz AT TIME ZONE 'Europe/Moscow', 1, 3);
+INSERT INTO cartravel.issue (id, name, executor_id, plan_date_start, plan_date_end, task_writer_id, tasks_id)
 VALUES (2, 'заменить авто', 2, '2022-07-01T05:55:55'::timestamptz AT TIME ZONE 'Europe/Moscow',
-        '2022-07-02T05:55:55'::timestamptz AT TIME ZONE 'Europe/Moscow',
         '2022-07-02T05:55:55'::timestamptz AT TIME ZONE 'Europe/Moscow', 1, 4);
-INSERT INTO cartravel.issue (id, name, executor_id, plan_date_start, plan_date_end, date_done, task_writer_id, tasks_id)
+INSERT INTO cartravel.issue (id, name, executor_id, plan_date_start, plan_date_end, task_writer_id, tasks_id)
 VALUES (3, 'ТО для авто', 2, '2022-08-01T05:55:55'::timestamptz AT TIME ZONE 'Europe/Moscow',
-        '2022-08-02T05:55:55'::timestamptz AT TIME ZONE 'Europe/Moscow',
-        '2022-08-05T05:55:55'::timestamptz AT TIME ZONE 'Europe/Moscow', 1, 2);
+        '2022-08-02T05:55:55'::timestamptz AT TIME ZONE 'Europe/Moscow', 1, 2);
 

@@ -27,11 +27,7 @@ public class MapperServiceCar {
         );
     }
 
-    public Car mapperDtoToEntity(CarDto dto){
-        Car car = new Car();
-        car.setCarNumber(dto.getCarNumber());
-        car.setModelName(dto.getModelName());
-        car.setProducerName(dto.getProducerName());
-        return car;
+    public Car mapperDtoToEntity(CarDto dto) {
+        return Car.createCar(dto.getCarNumber(), dto.getModelName(), dto.getProducerName());
     }
 }

@@ -1,6 +1,0 @@
-2022-12-11 02:03:44.631 info 11468 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3h25s67ms478µs700ns).
-2022-12-11 10:00:08.793 info 11468 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7h56m27s486ms936µs100ns).
-2022-12-11 14:05:33.402 info 11468 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3h8m23s351ms41µs400ns).
-2022-12-11 15:28:11.914 info 11468 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=14m37s430ms652µs).
-2022-12-11 16:49:08.764 info 11468 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h9m56s703ms328µs900ns).
-2022-12-11 21:48:59.630 info 11468 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h52m48s917ms692µs400ns).
