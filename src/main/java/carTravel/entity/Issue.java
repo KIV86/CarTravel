@@ -7,7 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @Entity
@@ -24,20 +26,17 @@ public class Issue {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
-    private String description;
-
     @NotNull
     @Column(name = "plan_date_start")
-    private LocalDateTime planDateStart;
+    private LocalTime planDateStart;
 
     @NotNull
     @Column(name = "plan_date_end")
-    private LocalDateTime planDateEnd;
+    private LocalTime planDateEnd;
 
     @NotNull
     @Column(name = "date_done")
-    private LocalDateTime dateDone;
+    private LocalDate  dateDone;
 
     @NotNull
     @Column(name = "is_done")

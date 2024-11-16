@@ -1,6 +1,8 @@
 package carTravel.controller;
 
 import carTravel.dto.CarDto;
+import carTravel.entity.Car;
+import carTravel.repository.car.CarRepository;
 import carTravel.service.carServise.CarRepositoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import java.util.Optional;
 public class CarController {
 
     private final CarRepositoryService carRepositoryService;
+    private final CarRepository carRepository;
 
     @PostMapping
     public String create( @Valid @RequestBody CarDto entity, Errors error) {
@@ -26,7 +29,7 @@ public class CarController {
             return "--> не корректно заполнены поля";
         }
         carRepositoryService.create(entity);
-        return String.valueOf(ResponseEntity.ok());
+        return ResponseEntity.ok().toString();
     }
 
     @DeleteMapping("/{id}")
@@ -49,4 +52,40 @@ public class CarController {
     public List<CarDto> findAll() {
         return carRepositoryService.findAll();
     }
+
+    @PutMapping()
+    public void findAll( @Valid @RequestBody CarDto entity) {
+        carRepositoryService.update(entity);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<String> update(@PathVariable("id") int id, @RequestBody CarDto updatedEntity, Errors error) {
+        if (error.hasErrors()) {
+            return ResponseEntity.badRequest().body("Не корректно заполнены поля");
+        }
+
+        Optional<Car> optionalCar = carRepository.findById(id);
+        if (!optionalCar.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Car existingCar = optionalCar.get();
+
+        // Обновляем только те поля, которые присутствуют в запросе
+        if (updatedEntity.getProducerName() != null) {
+            existingCar.setProducerName(updatedEntity.getProducerName());
+        }
+        if (updatedEntity.getModelName() != null) {
+            existingCar.setModelName(updatedEntity.getModelName());
+        }
+        if (updatedEntity.getCarNumber() != null) {
+            existingCar.setCarNumber(updatedEntity.getCarNumber());
+        }
+
+        // Сохраняем обновленную сущность в репозиторий
+        carRepository.save(existingCar);
+
+        return ResponseEntity.ok().build();
+    }
+
 }

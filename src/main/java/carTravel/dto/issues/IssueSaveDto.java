@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @RequiredArgsConstructor
@@ -19,13 +21,13 @@ public class IssueSaveDto {
     private String name;
 
     @NonNull
-    private LocalDateTime planDateStart;
+    private LocalTime planDateStart;
 
     @NonNull
-    private LocalDateTime planDateEnd;
+    private LocalTime planDateEnd;
 
     @NonNull
-    private LocalDateTime dateDone;
+    private LocalDate dateDone;
 
     @NonNull
     private Boolean isDone;

@@ -19,7 +19,7 @@ public class CarRepositoryService {
     private final MapperServiceCar mapper;
 
     public void create(CarDto dto) {
-        mapper.mapperDtoToEntity(dto);
+        repository.save(mapper.mapperDtoToEntity(dto));
     }
 
     public Optional<CarDto> get(int id) {
@@ -37,6 +37,11 @@ public class CarRepositoryService {
     public void delete(int id) {
         repository.deleteById(id);
     }
+
+    public void update(CarDto dto) {
+        repository.save(mapper.mapperDtoToEntity(dto));
+    }
+
 
     public List<CarDto> findAll() {
         return mapper

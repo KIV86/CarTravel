@@ -12,7 +12,9 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,8 +50,8 @@ public class IssueRepositoryService {
                 .setIsDone(false)
                 .setExecutorId(executorUser)
                 .setName(dto.getName())
-                .setPlanDateStart(LocalDateTime.now())
-                .setDateDone(dto.getPlanDateEnd())
+                .setPlanDateStart(LocalTime.now())
+                .setDateDone(dto.getDateDone())
                 .setTasks(task)
                 .setPlanDateEnd(dto.getPlanDateEnd())
                 .setTaskWriterId(taskWriterUser));

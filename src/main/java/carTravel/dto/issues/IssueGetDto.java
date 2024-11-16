@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.NonNull;
 
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @AllArgsConstructor
@@ -16,11 +18,11 @@ public class IssueGetDto {
     @NotEmpty
     private String name;
 
-    private LocalDateTime planDateStart;
+    private LocalTime planDateStart;
 
-    private LocalDateTime planDateEnd;
+    private LocalTime planDateEnd;
 
-    private LocalDateTime dateDone;
+    private LocalDate dateDone;
 
     @NonNull
     private Boolean isDone;
