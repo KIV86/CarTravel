@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 database.env
 *.log
+*.log.*
 
 ### STS ###
 .apt_generated
