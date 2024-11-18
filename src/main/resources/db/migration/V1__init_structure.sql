@@ -1,3 +1,6 @@
+CREATE DATABASE "user";
+CREATE ROLE "user";
+
 CREATE SCHEMA IF NOT EXISTS carTravel;
 
 create table carTravel.user_role
