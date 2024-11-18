@@ -4,21 +4,32 @@ services:
     build: .
     container_name: carTavel-1.0
     ports:
-      - 9000:8080
+      - 8080:8080
     depends_on:
-      - app_db
-    links:
-      - app_db
+      app_db:
+        condition: service_healthy
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://app_db:5432/my_database
-      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://app_db:5432/my_db
+      - SPRING_DATASOURCE_USERNAME=my_db
       - SPRING_DATASOURCE_PASSWORD=password
+
   app_db:
-    image: "postgres:14.1"
+    image: "postgres:latest"
+    container_name: app_db
     restart: always
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=my_database
+      - POSTGRES_USER=my_db         # Имя пользователя
+      - POSTGRES_PASSWORD=password # Пароль пользователя
+      - POSTGRES_DB=my_db          # Стандартная база данных
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command: >
+      sh -c "
+        docker-entrypoint.sh postgres &&
+        psql -U user -d postgres -c 'CREATE DATABASE \"user\";'
+      "
