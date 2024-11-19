@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+    <changeSet id="3" author="admin">
+        <!-- Данные для таблицы user_role -->
+        <insert tableName="user_role">
+            <column name="name" value="Admin"/>
+            <column name="role" value="boss"/>
+        </insert>
+        <insert tableName="user_role">
+            <column name="name" value="User"/>
+            <column name="role" value="slave"/>
+        </insert>
+
+        <!-- Данные для таблицы users -->
+        <insert tableName="users">
+            <column name="account" value="admin_account"/>
+            <column name="name" value="Bob"/>
+            <column name="user_role_id" value="1"/>
+        </insert>
+        <insert tableName="users">
+            <column name="account" value="user_account"/>
+            <column name="name" value="Jon"/>
+            <column name="user_role_id" value="2"/>
+        </insert>
+
+        <!-- Данные для таблицы tasks -->
+        <insert tableName="tasks">
+            <column name="name" value="Task 1"/>
+        </insert>
+        <insert tableName="tasks">
+            <column name="name" value="Task 2"/>
+        </insert>
+
+        <!-- Данные для таблицы issue -->
+        <insert tableName="issue">
+            <column name="is_done" value="false"/>
+            <column name="description" value="Initial Issue"/>
+            <column name="name" value="Issue 1"/>
+            <column name="plan_date_start" value="2024-11-01T00:00:00"/>
+            <column name="plan_date_end" value="2024-11-10T23:59:59"/>
+            <column name="task_writer_id" value="1"/>
+            <column name="executor_id" value="2"/>
+            <column name="tasks_id" value="1"/>
+        </insert>
+        <insert tableName="issue">
+            <column name="is_done" value="true"/>
+            <column name="description" value="Completed Issue"/>
+            <column name="name" value="Issue 2"/>
+            <column name="plan_date_start" value="2024-10-01T00:00:00"/>
+            <column name="plan_date_end" value="2024-10-10T23:59:59"/>
+            <column name="task_writer_id" value="2"/>
+            <column name="executor_id" value="1"/>
+            <column name="tasks_id" value="2"/>
+        </insert>
+
+        <!-- Данные для таблицы car -->
+        <insert tableName="car">
+            <column name="car_number" value="AA123BC"/>
+            <column name="model_name" value="Model S"/>
+            <column name="producer_name" value="Tesla"/>
+        </insert>
+        <insert tableName="car">
+            <column name="car_number" value="BB456CD"/>
+            <column name="model_name" value="Civic"/>
+            <column name="producer_name" value="Honda"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

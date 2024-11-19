@@ -1,12 +1,10 @@
 package carTravel.entity;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Data
 @Entity
@@ -21,7 +19,6 @@ public class Users {
     @NotBlank(message = "Имя пользователя не моджет быть пыстым")
     @Size(min = 4, message = "Больше букв плиз, необходимо минимум 4 символов")
     @Column(name = "name")
-    @Type(type = "org.hibernate.type.TextType")
     private String name;
 
     @NotBlank(message = "аккаунт пользователя не моджет быть пыстым")

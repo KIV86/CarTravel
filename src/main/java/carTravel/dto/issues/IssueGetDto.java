@@ -1,13 +1,13 @@
 package carTravel.dto.issues;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NonNull;
 
-import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+
 
 @Data
 @AllArgsConstructor

@@ -1,14 +1,13 @@
 package carTravel.entity;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Data
@@ -21,8 +20,8 @@ public class Issue {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @NotBlank(message = "Наименование задачи не моджет быть пыстым")
-    @Size(min = 10, message = "Больше букв плиз, необходимо минимум 10 символов")
+    @NotBlank(message = "Наименование задачи не может быть пустым")
+    @Size(min = 10, message = "Больше букв, пожалуйста. Необходимо минимум 10 символов")
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -36,22 +35,21 @@ public class Issue {
 
     @NotNull
     @Column(name = "date_done")
-    private LocalDate  dateDone;
+    private LocalDate dateDone;
 
     @NotNull
     @Column(name = "is_done")
     private Boolean isDone;
 
-    @OneToOne()
+    @ManyToOne
     @JoinColumn(name = "task_writer_id")
-    private Users taskWriterId;
+    private Users taskWriter;
 
-    @OneToOne()
+    @ManyToOne
     @JoinColumn(name = "executor_id")
-    private Users executorId;
+    private Users executor;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "tasks_id")
     private Tasks tasks;
-
 }

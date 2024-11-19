@@ -26,8 +26,8 @@ public class MapperServiceIssue {
                 entity.getPlanDateEnd(),
                 entity.getDateDone(),
                 entity.getIsDone(),
-                entity.getTaskWriterId().getName(),
-                entity.getExecutorId().getName(),
+                entity.getTaskWriter().getName(),
+                entity.getExecutor().getName(),
                 entity.getTasks().getName()
         );
     }

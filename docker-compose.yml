@@ -14,22 +14,21 @@ services:
       - SPRING_DATASOURCE_PASSWORD=password
 
   app_db:
-    image: "postgres:latest"
+    image: "postgres:13"
     container_name: app_db
     restart: always
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_USER=my_db         # Имя пользователя
-      - POSTGRES_PASSWORD=password # Пароль пользователя
-      - POSTGRES_DB=my_db          # Стандартная база данных
+      POSTGRES_USER: my_db
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: my_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "user"]
+      test: ["CMD", "pg_isready", "-U", "my_db"]
       interval: 10s
       timeout: 5s
       retries: 5
-    command: >
-      sh -c "
-        docker-entrypoint.sh postgres &&
-        psql -U user -d postgres -c 'CREATE DATABASE \"user\";'
-      "
+volumes:
+  postgres_data:

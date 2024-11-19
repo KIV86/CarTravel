@@ -4,6 +4,7 @@ import carTravel.dto.CarDto;
 import carTravel.entity.Car;
 import carTravel.repository.car.CarRepository;
 import carTravel.service.carServise.CarRepositoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +24,7 @@ public class CarController {
     private final CarRepository carRepository;
 
     @PostMapping
-    public String create( @Valid @RequestBody CarDto entity, Errors error) {
+    public String create(@Valid @RequestBody CarDto entity, Errors error) {
         if (error.hasErrors()) {
             return "--> не корректно заполнены поля";
         }

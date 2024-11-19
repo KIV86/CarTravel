@@ -14,5 +14,6 @@ public interface IssueRepository extends JpaRepository<Issue, Integer> {
     List<Issue> findIssuesByIsDoneIsTrueOrderByPlanDateEndDesc();
 
     List<Issue> findIssuesByExecutorId(Integer executorId);
+
 }
 

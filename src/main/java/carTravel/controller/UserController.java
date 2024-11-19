@@ -3,14 +3,14 @@ package carTravel.controller;
 import carTravel.dto.users.UsersDto;
 import carTravel.dto.users.UsersGetDto;
 import carTravel.service.userService.UsersRepositoryService;
+import jakarta.validation.Valid;
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.Valid;
-import javax.validation.ValidationException;
 import java.util.Optional;
 
 @RestController

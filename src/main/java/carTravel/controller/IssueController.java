@@ -3,6 +3,7 @@ package carTravel.controller;
 import carTravel.dto.issues.IssueGetDto;
 import carTravel.dto.issues.IssueSaveDto;
 import carTravel.service.issueServise.IssueRepositoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 

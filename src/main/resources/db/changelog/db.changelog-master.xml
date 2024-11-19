@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+    <!-- Устанавливаем схему по умолчанию -->
+    <property name="defaultSchemaName" value="carTravel"/>
+
+    <!-- Подключаем миграции в правильном порядке -->
+    <include file="db/changelog/1-create-schema.xml"/>
+    <include file="db/changelog/2-create-tables.xml"/>
+    <include file="/db/changelog/3-add-test-data.xml"/>
+</databaseChangeLog>

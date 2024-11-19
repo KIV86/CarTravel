@@ -2,14 +2,14 @@ package carTravel.controller;
 
 import carTravel.dto.tasks.TasksDto;
 import carTravel.service.tasksService.TasksRepositoryService;
+import jakarta.validation.Valid;
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.Valid;
-import javax.validation.ValidationException;
 import java.util.List;
 import java.util.Optional;
 

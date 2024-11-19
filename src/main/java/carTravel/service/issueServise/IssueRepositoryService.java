@@ -48,13 +48,13 @@ public class IssueRepositoryService {
         final var task = taskRepository.findById(taskId).orElse(null);
         return repository.save(new Issue()
                 .setIsDone(false)
-                .setExecutorId(executorUser)
+                .setExecutor(executorUser)
                 .setName(dto.getName())
                 .setPlanDateStart(LocalTime.now())
                 .setDateDone(dto.getDateDone())
                 .setTasks(task)
                 .setPlanDateEnd(dto.getPlanDateEnd())
-                .setTaskWriterId(taskWriterUser));
+                .setTaskWriter(taskWriterUser));
     }
 
     public void update(IssueUpdateDto dto){}
