@@ -12,7 +12,9 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -86,6 +88,27 @@ public class CarController {
         carRepository.save(existingCar);
 
         return ResponseEntity.ok().build();
+    }
+    @GetMapping("/cars/random-error")
+    public ResponseEntity<Object> getRandomError() {
+        if (Math.random() > 0.5) {
+            return ResponseEntity.ok(new CarDto(1, "Toyota", "Corolla", "ABC123"));
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Случайная ошибка сервера");
+        }
+    }
+    @GetMapping("/cars/unexpected")
+    public ResponseEntity<Object> getUnexpectedData() {
+        Map<String, Object> unexpectedData = new HashMap<>();
+        unexpectedData.put("unexpectedField", "Некорректные данные");
+        return ResponseEntity.ok(unexpectedData);
+    }
+
+    @GetMapping("/cars/delayed-response")
+    public ResponseEntity<CarDto> getDelayedResponse() throws InterruptedException {
+        Thread.sleep(5000); // Задержка в 5 секунд
+        return ResponseEntity.ok(new CarDto(1, "Toyota", "Corolla", "ABC123"));
     }
 
 }

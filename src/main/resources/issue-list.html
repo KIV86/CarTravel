@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Список задач (Issue)</title>
+    <link href="/webjars/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Список задач (Issue)</h1>
+    <a href="/ui/issues/create" class="btn btn-primary mb-3">Добавить задачу</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Название</th>
+            <th>Дата начала</th>
+            <th>Дата окончания</th>
+            <th>Дата выполнения</th>
+            <th>Выполнено</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="issue : ${issues}">
+            <td th:text="${issue.id}"></td>
+            <td th:text="${issue.name}"></td>
+            <td th:text="${issue.planDateStart}"></td>
+            <td th:text="${issue.planDateEnd}"></td>
+            <td th:text="${issue.dateDone}"></td>
+            <td th:text="${issue.isDone ? 'Да' : 'Нет'}"></td>
+            <td>
+                <a th:href="@{/ui/issues/edit/{id}(id=${issue.id})}" class="btn btn-warning btn-sm">Изменить</a>
+                <form th:action="@{/ui/issues/delete/{id}(id=${issue.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
